@@ -13,5 +13,5 @@ public record CreateProfileDto
 {
     public IEnumerable<CreateEducationDto> Education { get; set; }
     public IEnumerable<CreateExperienceDto> Experience { get; set; }
-    public IFormFile Resume { get; set; }
+    public IFormFile? Resume { get; set; }
 }

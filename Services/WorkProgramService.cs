@@ -35,7 +35,9 @@ public class WorkProgramService : IWorkProgramService
     public async Task<IEnumerable<WorkProgramDto>> GetAllWorkProgram()
     {
         var workPrograms = await repositoryManager.workProgramRepo.GetAllWorkProgram(null);
+        if (workPrograms != null)
         return _mapper.Map<IEnumerable<WorkProgramDto>>(workPrograms);
+        else return Enumerable.Empty<WorkProgramDto>();
     }
 
     public async  Task<WorkProgramDto> GetWorkProgram(Guid workProgramId)

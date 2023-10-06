@@ -20,13 +20,16 @@ public class ApplicationFormService : IApplicationFormService
     public async Task<ApplicationFormDto> CreateApplicationForm(CreateApplicationFormDto applicationForm)
     {
         var appForm = _mapper.Map<ApplicationForm>(applicationForm);
-        using (var memoryStream = new MemoryStream())
+        if (applicationForm.Image != null)
         {
+            using var memoryStream = new MemoryStream();
             await applicationForm.Image.CopyToAsync(memoryStream);
             appForm.Image = memoryStream.ToArray();
         }
-        using (var memoryStream = new MemoryStream())
+        if (applicationForm.Profile.Resume !=
+            null)
         {
+            using var memoryStream = new MemoryStream();
             await applicationForm.Profile.Resume.CopyToAsync(memoryStream);
             appForm.Profile.Resume = memoryStream.ToArray();
         }
@@ -37,7 +40,7 @@ public class ApplicationFormService : IApplicationFormService
 
     public async void DeleteApplicationForm(Guid id)
     {
-        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(id, true,null);
+        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(id, true, null);
         if (appForm != null)
         {
             repositoryManager.applicationFormRepo.DeleteApplicationForm(appForm);
@@ -47,13 +50,32 @@ public class ApplicationFormService : IApplicationFormService
 
     public async Task<ApplicationFormDto> GetApplicationForm(Guid id)
     {
-        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(id, false,null);
-        return _mapper.Map<ApplicationFormDto>(appForm);
+        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(id, false, null);
+        var appFormReturn = _mapper.Map<ApplicationFormDto>(appForm);
+        foreach (var question in appForm.PersonalInformation.Questions)
+        {
+            switch (question.QuestionType.ToLower().Trim())
+            {
+                case "multiple choice":
+                    appFormReturn.PersonalInformation.Questions.ToList().Add(_mapper.Map<MultipleChoiceDto>(question));
+                    break;
+                case "YesNo":
+                    appFormReturn.PersonalInformation.Questions.ToList().Add(_mapper.Map<YesNoDto>(question));
+                    break;
+                case "dropdown":
+                    appFormReturn.PersonalInformation.Questions.ToList().Add(_mapper.Map<DropDownDto>(question));
+                    break;
+                default:
+                    appFormReturn.PersonalInformation.Questions.ToList().Add(_mapper.Map<QuestionDto>(question));
+                    break;
+            }
+        }
+        return appFormReturn;
     }
 
     public async Task<ApplicationFormDto> UpdateApplicationForm(ApplicationFormDto applicationForm)
     {
-        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(applicationForm.Id, true,null);
+        var appForm = await repositoryManager.applicationFormRepo.GetApplicationForm(applicationForm.Id, true, null);
         if (appForm != null)
         {
             _mapper.Map(applicationForm, appForm);

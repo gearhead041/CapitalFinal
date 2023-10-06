@@ -26,8 +26,7 @@ public class RepositoryManager : IRepositoryManager
 
     public async Task Save()
     {
-        Console.WriteLine("And THe is Database is Create!");
-        Console.WriteLine(await context.Database.EnsureCreatedAsync());
+        await context.Database.EnsureCreatedAsync();
         await context.SaveChangesAsync();
         
     }

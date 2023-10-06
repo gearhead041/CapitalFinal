@@ -1,6 +1,5 @@
 using Contracts.Repository;
 using Contracts.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
@@ -23,12 +22,19 @@ builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddDbContext<RepositoryContext>(options =>
 {
-    options.UseCosmos("https://localhost:8081", 
+    options.UseCosmos("https://localhost:8081",
         accountKey: "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
         databaseName: "CapitalTest"
         );
-});
     
+});
+
+var options = new DbContextOptionsBuilder<RepositoryContext>()
+    .UseCosmos("https://localhost:8081", 
+    "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
+    , nameof(RepositoryContext)).Options;
+//await RepositoryContext.CheckAndSeedDatabaseAsync(options);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

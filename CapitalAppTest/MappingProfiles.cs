@@ -9,14 +9,18 @@ public class MappingProfiles : AutoMapper.Profile
     {
         CreateMap<CreateApplicationFormDto, ApplicationForm>().ReverseMap();
         CreateMap<ApplicationFormDto, ApplicationForm>().ReverseMap();
-        //CreateMap<CreateProfileDto, Entities.Models.Profile>().ReverseMap();
-        //CreateMap<ProfileDto, Entities.Models.Profile>().ReverseMap();
-        //CreateMap<CreateEducationDto, Education>().ReverseMap();
-        //CreateMap<EducationDto,Education>().ReverseMap();
-        //CreateMap<ExperienceDto, Experience>().ReverseMap();
-        //CreateMap<CreateExperienceDto,Experience>().ReverseMap();
-        //CreateMap<QuestionDto, Question>().ReverseMap();
-        //CreateMap<DropdownQuestionDto, Dropdown>().ReverseMap();
+        CreateMap<CreatePersonalInfoDto, PersonalInfoDto>().ReverseMap();
+        CreateMap<CreatePersonalInfoDto, PersonalInfo>().ReverseMap();
+        CreateMap<CreateQuestionDto,Question>().ReverseMap();
+        CreateMap<CreateProfileDto, Entities.Models.Profile>().ReverseMap();
+        CreateMap<ProfileDto, Entities.Models.Profile>().ReverseMap();
+        CreateMap<CreateEducationDto, Education>().ReverseMap();
+        CreateMap<EducationDto,Education>().ReverseMap();
+        CreateMap<ExperienceDto,Experience>().ReverseMap();
+        CreateMap<CreateExperienceDto, Experience>().ReverseMap();
+        CreateMap<DropDownDto, Question>().ReverseMap();
+        CreateMap<MultipleChoiceDto,Question>().ReverseMap();
+        CreateMap<YesNoDto,Question>().ReverseMap();
         CreateMap<CreateStageDto,Stage>().ReverseMap();
         CreateMap<StageDto,Stage>().ReverseMap();
         CreateMap<VideoInterviewStageDto,VideoInterView>().ReverseMap();
