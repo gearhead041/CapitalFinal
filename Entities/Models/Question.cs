@@ -13,11 +13,3 @@ public class Question
     public string CorrectAnswer { get; set; }
 
 }
-
-//public class Answer
-//{ 
-//    public Guid Id {  set; get; }
-//    public Guid QuestionId { set; get; }
-//    public Question Question { set; get; }
-//    public string AnswerText { get; set; }
-//}

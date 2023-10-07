@@ -16,21 +16,6 @@ public class RepositoryContext : DbContext
 
         base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Entity<Question>()
-        //    .HasOne<ApplicationForm>()
-        //    .WithMany(a => a.AdditionalQuestions)
-        //    .HasForeignKey(q => q.ApplicationFormId);
-
-        //modelBuilder.Entity<Question>()
-        //    .HasOne<PersonalInfo>()
-        //    .WithMany(p => p.Questions);
-
-        //modelBuilder.Entity<ApplicationForm>()
-        //    .OwnsOne(p => p.PersonalInformation, sa =>
-        //    {
-        //        sa.Property(a => a.Questions).
-        //    });
-
     }
     public DbSet<WorkProgram> WorkProgram { get; set; }
     public DbSet<ApplicationForm> ApplicationForm { get; set; }
