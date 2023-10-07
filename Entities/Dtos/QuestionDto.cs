@@ -4,8 +4,6 @@ namespace Entities.Dtos;
 
 public record QuestionDto
 {
-    public Guid QuestionId { get; set; }
-    public Guid ApplicationFormId { get; set; }
     [Required]
     public string QuestionType { get; set; }
     [Required]
@@ -27,13 +25,13 @@ public record YesNoDto : QuestionDto
 
 public record MultipleChoiceDto : QuestionDto
 {
-    public IEnumerable<string>? Choices { get; set; }
+    public string[] Choices { get; set; }
     public int? MaxChoices { get; set; }
     public bool? EnableOther { get; set; }
 }
 
 public record DropDownDto : QuestionDto {
-    public IEnumerable<string>? Choices { get; set; }
+    public string[] Choices { get; set; }
     public bool? EnableOther { get; set; }
     
 }

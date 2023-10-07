@@ -6,7 +6,7 @@ public record ProfileDto
 {
     public IEnumerable<EducationDto> Education { get; set; }
     public IEnumerable<ExperienceDto> Experience { get; set; }
-    public IFormFile Resume { get; set; }
+    public IFormFile? Resume { get; set; }
 }
 
 public record CreateProfileDto

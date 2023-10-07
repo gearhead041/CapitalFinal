@@ -9,8 +9,8 @@ public class MappingProfiles : AutoMapper.Profile
     {
         CreateMap<CreateApplicationFormDto, ApplicationForm>().ReverseMap();
         CreateMap<ApplicationFormDto, ApplicationForm>().ReverseMap();
-        CreateMap<CreatePersonalInfoDto, PersonalInfoDto>().ReverseMap();
         CreateMap<CreatePersonalInfoDto, PersonalInfo>().ReverseMap();
+        CreateMap<PersonalInfoDto, PersonalInfo>().ReverseMap();
         CreateMap<CreateQuestionDto,Question>().ReverseMap();
         CreateMap<CreateProfileDto, Entities.Models.Profile>().ReverseMap();
         CreateMap<ProfileDto, Entities.Models.Profile>().ReverseMap();
@@ -31,6 +31,7 @@ public class MappingProfiles : AutoMapper.Profile
         CreateMap<QuestionDto,Question>().ReverseMap();
         CreateMap<DateOnly, string>().ConvertUsing(new DateOnlyToStringConverter());
         CreateMap<string, DateOnly>().ConvertUsing(new StringToDateOnlyConverter());
+        CreateMap<IFormFile, FileData>().ReverseMap();
     }
 }
 

@@ -24,14 +24,14 @@ public class ApplicationFormService : IApplicationFormService
         {
             using var memoryStream = new MemoryStream();
             await applicationForm.Image.CopyToAsync(memoryStream);
-            appForm.Image = memoryStream.ToArray();
+            appForm.Image.Data = memoryStream.ToArray();
         }
         if (applicationForm.Profile.Resume !=
             null)
         {
             using var memoryStream = new MemoryStream();
             await applicationForm.Profile.Resume.CopyToAsync(memoryStream);
-            appForm.Profile.Resume = memoryStream.ToArray();
+            appForm.Profile.Resume.Data = memoryStream.ToArray();
         }
         repositoryManager.applicationFormRepo.CreateApplicationForm(appForm);
         await repositoryManager.Save();

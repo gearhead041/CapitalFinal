@@ -7,5 +7,5 @@ public class Profile
 {
     public IEnumerable<Education> Education { get; set; }
     public IEnumerable<Experience> Experience { get; set; }
-    public byte[] Resume { get; set; }
+    public FileData Resume { get; set; }
 }
